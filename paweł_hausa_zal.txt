@@ -1,0 +1,24 @@
+select
+firstname,lastname,country,sum(customernumber) as "ilosc"
+from employees
+    join customers on employees.employeenumber = customers.salesRepEmployeeNumber
+    group by customernumber
+
+4a
+select 
+year(orderDate) as "rok", count(quantityordered*priceeach) as "liczba"
+from orderdetails
+join products on orderdetails.productCode = products.productCode
+join orders on orderdetails.orderNumber = orders.orderNumber
+where productName = "1969 Harley Davidson Ultimate Chopper"
+group by year(orderDate)
+4b
+select 
+year(orderDate) as "rok", sum(quantityordered*priceeach) as "suma"
+from orderdetails
+join products on orderdetails.productCode = products.productCode
+join orders on orderdetails.orderNumber = orders.orderNumber
+where productName = "1969 Harley Davidson Ultimate Chopper"
+group by year(orderDate)
+4c
+select productline, count(productcode) as "ilosc" from products group by productline having count(productcode) > 10
